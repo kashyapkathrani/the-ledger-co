@@ -2,9 +2,11 @@
 Code for The Ledger Co. by GeekTrust.
 
 Command to run
+
 python geektrust.py deserveTestCase.txt
 
 Output
+
 IDIDI Dale UPDATED EMI AMOUNT 227.0 UPDATED REPAYMENT AMOUNT 12464.4
 
 The changes are made in models.py file.
