@@ -1,0 +1,29 @@
+LOAN IDIDI Dale 
+Principal - 10000
+term - 5
+interest - 4
+Repayment Amount - 12000
+interest amount = 2000
+no. emis - 60
+emi amount = 200
+interestin emi = 33.33
+Principal in emi = 166.66
+
+interest change after 6 month
+
+total Amount (Balance)- 1000
+Remaining - 11000
+interest paid 
+
+new interest - 8
+
+Principal remaining = 166.66*55 = 9166
+
+Repayment Amount = 12465
+interest amount = 3300
+no. emis - 55
+emi amount = 226
+interestin emi = 60
+Principal in emi = 166
+
+

@@ -11,20 +11,41 @@ class Loan:
         self.term = term
         self.interest_rate = interest_rate
         self.lump_sum_payments = {}
+        self.repayment_amount = self.get_total_repayment_amount(principal, interest_rate, term)
+        self.emi_amount = self.get_emi_amount()
+        self.interest_amount_in_emi = self.calculate_interest_amount()
+        
 
-    def get_total_repayment_amount(self):
+    def make_interest_change(self,new_interest_rate):
+        term_remaining = self.term - 0.5
+        amount_paid = self.emi_amount*5  # 5 as we are calculating only for change after 1st 6 months
+        interest_amount_paid = self.interest_amount_in_emi*5
+
+        principal_amount_paid = amount_paid - interest_amount_paid
+        principal_amount_remaining = self.principal - principal_amount_paid
+
+        self.repayment_amount = self.get_total_repayment_amount(principal_amount_remaining, new_interest_rate, term_remaining)
+        self.emi_amount = math.ceil(float(self.repayment_amount)/55) # 55 (= 60-5) as we are calculating only for change after 1st 6 months
+
+        return {'emi_amount':self.emi_amount, 'repayment_amount':self.repayment_amount}
+
+    def calculate_interest_amount(self):
+        interest_amount = (self.principal*self.term*self.interest_rate)/100
+        return interest_amount/(self.term*12)
+
+    def get_total_repayment_amount(self,principal, interest_rate, term):
         """The method returns total amount to be repaid"""
 
-        interest = (self.principal*self.interest_rate*self.term)/100
-        total_repayment_amount = self.principal + interest
+        interest = (principal*interest_rate*term)/100
+        total_repayment_amount = principal + interest
 
         return total_repayment_amount
 
     def get_emi_amount(self):
         """The method returns emi amount"""
 
-        total_repayment_amount = self.get_total_repayment_amount()
-        emi_amount = math.ceil(float(total_repayment_amount)/(self.term*12))
+        repayment_amount = self.repayment_amount
+        emi_amount = math.ceil(float(repayment_amount)/(self.term*12))
         return emi_amount
 
     def add_lump_sum_payment(self, lump_sum_amount, no_of_emi):

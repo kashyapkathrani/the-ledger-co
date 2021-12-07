@@ -44,3 +44,20 @@ def get_balance(bank_name, borrower_name, no_of_emi_paid):
     print(output_format)
 
     return response
+
+def modify_interest_rate(bank_name, borrower_name, new_interest_rate):
+    """The method is use to add a lump sum payment"""
+
+    identifier = get_loan_identifier(bank_name, borrower_name)
+    try:
+        loan = LOANS[identifier]
+    except:
+        raise Exception("Error - No such loan exists")
+
+    response = loan.make_interest_change(new_interest_rate)
+    output_format = bank_name+" "+borrower_name+" "
+    output_format += "UPDATED EMI AMOUNT "+str(response['emi_amount'])+" UPDATED REPAYMENT AMOUNT "+str(response['repayment_amount'])
+
+    print(output_format)
+
+    return response

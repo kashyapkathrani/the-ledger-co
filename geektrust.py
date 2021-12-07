@@ -44,6 +44,15 @@ def route_input(input_line):
         #For fetching loan balance calling get_balance method of processor module
         return processor.get_balance(bank_name, borrower_name, no_of_emi_paid)
 
+    if command == "INTEREST_CHANGE":
+        #retrieving all the arguments required for fetching loan balance
+        bank_name = args[1]
+        borrower_name = args[2]
+        new_interest_rate = int(args[3])
+        
+        return processor.modify_interest_rate(bank_name, borrower_name, new_interest_rate)
+
+
     return None
 
 if __name__ == "__main__":
